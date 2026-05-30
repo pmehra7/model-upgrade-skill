@@ -1,0 +1,30 @@
+[
+  {
+    "id": "route-001",
+    "input": "Ticket: 'I was charged twice for my September statement, please refund the duplicate.'",
+    "expected": {"name": "route_ticket", "input": {"team": "billing"}},
+    "grader": "tool_call",
+    "metadata": {"slice": "billing", "severity": "medium"}
+  },
+  {
+    "id": "route-002",
+    "input": "Ticket: 'There are transactions on my account I did not make. I think someone has access.'",
+    "expected": {"name": "route_ticket", "input": {"team": "risk"}},
+    "grader": "tool_call",
+    "metadata": {"slice": "fraud", "severity": "high"}
+  },
+  {
+    "id": "route-003",
+    "input": "Ticket: 'I cannot log in, my 2FA code never arrives.'",
+    "expected": {"name": "route_ticket", "input": {"team": "identity"}},
+    "grader": "tool_call",
+    "metadata": {"slice": "identity", "severity": "medium"}
+  },
+  {
+    "id": "route-004",
+    "input": "Ticket: 'Do you offer accounts for small businesses?'",
+    "expected": {"name": "route_ticket", "input": {"team": "general"}},
+    "grader": "tool_call",
+    "metadata": {"slice": "general", "severity": "low"}
+  }
+]

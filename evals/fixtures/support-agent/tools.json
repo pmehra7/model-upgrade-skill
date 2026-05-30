@@ -1,0 +1,25 @@
+[
+  {
+    "name": "lookup_account",
+    "description": "Look up a customer account.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "account_id": {"type": "string"}
+      },
+      "required": ["account_id"]
+    }
+  },
+  {
+    "name": "route_ticket",
+    "description": "Route the ticket to a team.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "team": {"type": "string"},
+        "severity": {"type": "string"}
+      },
+      "required": ["team"]
+    }
+  }
+]

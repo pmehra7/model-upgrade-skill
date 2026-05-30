@@ -1,0 +1,23 @@
+{
+  "skill_name": "model-upgrade",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We run our support-triage agent on claude-sonnet-4-5 and want to move it to the latest Opus model. The setup is in the folder evals/fixtures/support-agent (system_prompt.txt, tools.json, and evals.json with our routing test cases). Can you walk us through the upgrade — what's likely to break, and is it safe to switch? Don't actually call any paid APIs; just plan it out and tell me what you'd run.",
+      "expected_output": "Runs the four-phase upgrade flow grounded in the provided files: summarizes the current setup (sonnet-4-5 -> latest Opus, the two tools, the 4 eval cases), flags likely impact areas (notably the prompt's forced verbosity/over-thinking which is wasteful on newer models, and tool-misuse/'risk' high-severity routing as the dangerous regression), describes the old-vs-new eval comparison it would run (referencing run_eval_comparison.py and the tool_call grader), and outlines a migration report with a before/after structure. Should not pretend it actually executed paid runs.",
+      "files": ["evals/fixtures/support-agent/system_prompt.txt", "evals/fixtures/support-agent/tools.json", "evals/fixtures/support-agent/evals.json"]
+    },
+    {
+      "id": 2,
+      "prompt": "I'm the AI platform lead at an ISV. We have ~40 Claude agents across a bunch of product teams, all on an older Sonnet that's getting deprecated, and we need a repeatable way to migrate the whole fleet to a current model without each team reinventing the wheel. How should we approach this, and can you give me the migration summary format we'd standardize on?",
+      "expected_output": "Identifies the Platform Lead / fleet persona and emphasizes a consistent, repeatable rollout: a per-agent upgrade loop (capture setup -> identify changes -> eval old vs new -> tune -> report), the deprecation deadline as a hard driver, what's reusable across agents to amortize cost, and provides/points to the standardized migration report template with before/after eval results. Mentions checking the live deprecation docs.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "We want to try the newest Claude Opus for our contract-analysis assistant (currently a single Messages API call on Sonnet). Problem: we don't have any evals set up. Here's our current system prompt: 'You are a contract analysis assistant. Given a contract, extract the parties, effective date, termination clauses, and any auto-renewal terms. Return JSON.' Is it safe to just switch?",
+      "expected_output": "Pushes back on a blind switch with no evals and offers to bootstrap a small starter eval set (15-30 representative contracts, capture current-model output, confirm gold answers, save in the eval format) before comparing models. Then describes the old-vs-new comparison and likely impact areas for this setup (notably JSON format drift, since the output is parsed). Does not declare it safe without evidence.",
+      "files": []
+    }
+  ]
+}
